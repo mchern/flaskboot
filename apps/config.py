@@ -11,7 +11,7 @@ class Config(object):
 
     # Set up the App SECRET_KEY
     # SECRET_KEY = config('SECRET_KEY'  , default='S#perS3crEt_007')
-    SECRET_KEY = os.getenv('SECRET_KEY', 'S#perS3crEt_007')
+    SECRET_KEY = os.getenv('SECRET_KEY', 'S#perS3crEtMy_007')
 
     # This will create a file in <app> FOLDER
     SQLALCHEMY_DATABASE_URI = 'postgresql://admin:admin@localhost:5432/test'
@@ -52,7 +52,7 @@ class ProductionConfig(Config):
         os.getenv('DB_ENGINE'   , 'postgresql'),
         os.getenv('DB_USERNAME' , 'max'),
         os.getenv('DB_PASS'     , 'qwe123'),
-        os.getenv('DB_HOST'     , '10.24.240.3'),
+        os.getenv('DB_HOST'     , '35.225.226.179'),
         os.getenv('DB_PORT'     , 5432),
         os.getenv('DB_NAME'     , 'max')
     )
