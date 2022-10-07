@@ -1,0 +1,1 @@
+gcloud beta run deploy --image gcr.io/striimfieldproject/cosmostobq --platform managed

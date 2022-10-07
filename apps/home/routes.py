@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 """
-Copyright (c) 2019 - present AppSeed.us
+Copyright (c) 2022 - present AppSeed.us
 """
 
 from apps.home import blueprint
-from flask import render_template, request
+from flask import render_template, request,url_for
 from flask_login import login_required
 from jinja2 import TemplateNotFound
 
@@ -12,8 +12,26 @@ from jinja2 import TemplateNotFound
 @blueprint.route('/index')
 @login_required
 def index():
-
     return render_template('home/index.html', segment='index')
+
+@blueprint.route('/job_create')
+@login_required
+def job_create():
+    job="a"
+    return render_template('home/job_create.html', segment='job', job=job)
+
+@blueprint.route('/job_list')
+@login_required
+def job_list():
+    jobs="a"
+    return render_template('home/job_list.html', segment='job', jobs=jobs)
+
+@blueprint.route('/save', methods=('GET', 'POST'))
+@login_required
+def save():
+    jobs="a"
+    return render_template('home/job_list.html', segment='job', jobs=jobs)
+
 
 
 @blueprint.route('/<template>')

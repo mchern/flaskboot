@@ -14,7 +14,9 @@ class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY', 'S#perS3crEt_007')
 
     # This will create a file in <app> FOLDER
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
+    SQLALCHEMY_DATABASE_URI = 'postgresql://admin:admin@localhost:5432/test'
+
+    #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'db.sqlite3')
     SQLALCHEMY_TRACK_MODIFICATIONS = False 
 
     # Assets Management
@@ -38,13 +40,21 @@ class ProductionConfig(Config):
     REMEMBER_COOKIE_DURATION = 3600
 
     # PostgreSQL database
+    #SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:{}/{}'.format(
+    #    os.getenv('DB_ENGINE'   , 'mysql'),
+    #    os.getenv('DB_USERNAME' , 'appseed_db_usr'),
+    #    os.getenv('DB_PASS'     , 'pass'),
+    #    os.getenv('DB_HOST'     , 'localhost'),
+    #    os.getenv('DB_PORT'     , 3306),
+    #    os.getenv('DB_NAME'     , 'appseed_db')
+    #)
     SQLALCHEMY_DATABASE_URI = '{}://{}:{}@{}:{}/{}'.format(
-        os.getenv('DB_ENGINE'   , 'mysql'),
-        os.getenv('DB_USERNAME' , 'appseed_db_usr'),
-        os.getenv('DB_PASS'     , 'pass'),
-        os.getenv('DB_HOST'     , 'localhost'),
-        os.getenv('DB_PORT'     , 3306),
-        os.getenv('DB_NAME'     , 'appseed_db')
+        os.getenv('DB_ENGINE'   , 'postgresql'),
+        os.getenv('DB_USERNAME' , 'max'),
+        os.getenv('DB_PASS'     , 'qwe123'),
+        os.getenv('DB_HOST'     , '10.24.240.3'),
+        os.getenv('DB_PORT'     , 5432),
+        os.getenv('DB_NAME'     , 'max')
     )
 
 

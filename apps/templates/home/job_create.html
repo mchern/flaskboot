@@ -1,0 +1,124 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Cloud Data Import {% endblock %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="py-4">
+      <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+          <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+              <li class="breadcrumb-item">
+                  <a href="#">
+                      <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                  </a>
+              </li>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Job Create</li>
+          </ol>
+      </nav>
+      <div class="d-flex justify-content-between w-100 flex-wrap">
+          <div class="mb-3 mb-lg-0">
+              <h1 class="h4">Create Job</h1>
+              <p class="mb-0">Please configure connection properties for source and target.</p>
+          </div>
+          <div>
+              <a href="transactions.html" class="btn btn-outline-gray"><i class="far fa-question-circle me-1"></i> All Jobs</a>
+          </div>
+      </div>
+  </div>
+
+ <form action = "/save" method = "POST"
+         enctype = "multipart/form-data">
+
+  <div class="row">
+      <div class="col-12 mb-4">
+          <div class="card border-0 shadow components-section">
+              <div class="card-body">     
+                  <div class="row mb-4">
+                      <div class="col-lg-4 col-sm-6">
+                      <h3>Azure Cosmos Db configuration</h3>
+                          <div class="mb-4">
+                              <label for="csproject">Project ID</label>
+                              <input type="text" class="form-control" id="csproject" name="csproject" value="{{ job.csproject }}" aria-describedby="csprojectHelp">
+                              <small id="csprojectHelp" class="form-text text-muted">Cosmos DB project ID can be found in Azure portal.</small>
+                          </div>
+                          <div class="mb-3">
+                              <label for="exampleInputIconLeft">Connection Url</label>
+                              <div class="input-group">
+                                  <span class="input-group-text" id="basic-addon1">
+                                      <svg class="icon icon-xs text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd"></path></svg>
+                                  </span>
+                                  <input type="text" class="form-control" placeholder="mongodb://" id="csconnection" name="csconnection" value="{{ job['csconnection'] }}" placeholder="Connection" aria-label="Connection URL">
+                              </div>
+                          </div>
+                          <div class="mb-4">
+                              <label for="csdb">Database</label>
+                              <input type="text" class="form-control" id="csdb" name="csdb" value="{{ job.csdb }}" aria-describedby="csdbHelp">
+                              <small id="csdbHelp" class="form-text text-muted">Cosmos Database name.</small>
+                          </div>
+                          <div class="mb-4">
+                              <label for="csproject">Collection(s)</label>
+                              <input type="text" class="form-control" id="cscollection" name="cscollection" value="{{ job.cscollection }}" aria-describedby="cscollectionHelp">
+                              <small id="cscollectionHelp" class="form-text text-muted">Semicolon separated list of collections.</small>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-sm-6">
+                           <h3>Google Cloud Storage</h3>
+                           <div class="mb-3">
+                              <label for="formFile" class="form-label">Google Authentication Json</label>
+                              <input class="form-control" type="file" id="gcauthjson" name="gcauthjson" aria-describedby="gcsauthjsonHelp">
+                              <small id="gcsauthjsonHelp" class="form-text text-muted">Grant service account write permissions to GCS and Big Query.</small>
+                          </div>
+                           <div class="mb-4">
+                              <label for="csproject">Project ID</label>
+                              <input type="text" class="form-control" id="gcsproject" name="gcsproject" value="{{ job.gcsproject }}" aria-describedby="gcsprojectHelp">
+                              <small id="gcsprojectHelp" class="form-text text-muted">Cosmos DB project ID can be found in Azure portal.</small>
+                          </div>
+                          <div class="mb-4">
+                              <label for="csproject">Region</label>
+                              <input type="text" class="form-control" id="gcsregion" name="gcsregion" placeholder="us-east1" value="{{ job.gcsregion }}" aria-describedby="gcsregionHelp">
+                              <small id="gcsregionHelp" class="form-text text-muted">Data center location (us-east1).</small>
+                          </div>
+                            <div class="mb-4">
+                              <label for="csproject">Bucket</label>
+                              <input type="text" class="form-control" id="gcsbucket" name="gcsbucket"  value="{{ job.gcsbucket }}" aria-describedby="gcsbucketHelp">
+                              <small id="gcsbucketHelp" class="form-text text-muted">Temporary storage bucket.</small>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-sm-6">
+                           <h3>Google Big Query</h3>
+                           <div class="mb-4">
+                              <label for="bqproject">Project ID</label>
+                              <input type="text" class="form-control" id="bqproject" name="bqproject" value="{{ job.bqproject }}" aria-describedby="bqprojectHelp">
+                              <small id="bqprojectHelp" class="form-text text-muted">Big Query projcet ID.</small>
+                          </div>
+                           <div class="mb-4">
+                              <label for="bqdataset">Dataset</label>
+                              <input type="text" class="form-control" id="bqdataset" name="bqdataset" value="{{ job.bqdataset }}" aria-describedby="bqdatasetHelp">
+                              <small id="bqdatasetHelp" class="form-text text-muted">Cosmos DB project ID can be found in Azure portal.</small>
+                          </div>
+                          <div class="mb-4">
+                              <label for="bqtable">Table(s)</label>
+                              <input type="text" class="form-control" id="bqtable" name="bqtable" value="{{ job.bqtable }}" aria-describedby="bqtableHelp">
+                              <small id="bqtableHelp" class="form-text text-muted">Semicolon separated list of Big Query tables.</small>
+                          </div>
+                      </div>
+                  </div>
+                 <div class="row mb-4">
+                      <div class="col-lg-4 col-sm-6">
+                        <a href="/job_list"><input type="button"  value="Cancel"/></a>
+                        <input type = "submit" value="Save"/>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    </form>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
